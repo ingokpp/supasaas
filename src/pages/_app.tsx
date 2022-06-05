@@ -1,7 +1,9 @@
 import { ChakraProvider } from "@chakra-ui/react";
+import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
+import { UserProvider } from "@supabase/supabase-auth-helpers/react";
 import { NextPage } from "next";
 import type { AppProps } from "next/app";
-import useUpdateAuthCookie from "../hooks/useUpdateAuthCookie";
+import { UserContextProvider } from "../context/User/userContextProvider";
 import theme from "../theme";
 
 export type NextPageWithLayout = NextPage & {
@@ -16,12 +18,13 @@ const MyApp = ({ Component, pageProps }: AppPropsWithLayout) => {
   // Use the layout defined at the page level, if available
   const getLayout = Component.getLayout || ((page) => page);
 
-  // Keep the auth cookie up to date by listening on supabases onAuthStateChange
-  useUpdateAuthCookie();
-
   return (
     <ChakraProvider theme={theme}>
-      {getLayout(<Component {...pageProps} />)}
+      <UserProvider supabaseClient={supabaseClient}>
+        <UserContextProvider supabaseClient={supabaseClient}>
+          {getLayout(<Component {...pageProps} />)}
+        </UserContextProvider>
+      </UserProvider>
     </ChakraProvider>
   );
 };

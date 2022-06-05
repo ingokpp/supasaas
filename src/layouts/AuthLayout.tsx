@@ -1,13 +1,12 @@
 import {
   Box,
   Flex,
-  Heading,
   Icon,
   IconProps,
   Stack,
   useBreakpointValue,
 } from "@chakra-ui/react";
-import { TiFlash } from "react-icons/ti";
+import Logo from "../components/ui/Logo";
 
 interface AppLayoutProps {
   page: React.ReactNode;
@@ -23,23 +22,7 @@ const AuthLayout = (props: AppLayoutProps) => {
         px={2}
         alignItems={"center"}
       >
-        <Flex alignItems={"center"} gap={3}>
-          <Box
-            bgGradient="linear(to-r, gray.600, gray.900)"
-            rounded="2xl"
-            p={2}
-            color="white"
-          >
-            <TiFlash fontSize={45} />
-          </Box>
-          <Heading
-            bgGradient="linear(gray.600, gray.900)"
-            bgClip={"text"}
-            userSelect="none"
-          >
-            SupaRetro
-          </Heading>
-        </Flex>
+        <Logo />
         <Stack
           mt={12}
           bg={"gray.50"}

@@ -12,7 +12,7 @@ const enforceNotAuthenticated: (
     if (user) {
       return {
         props: {},
-        redirect: { destination: redirectUrl ? redirectUrl : "/sfd" },
+        redirect: { destination: redirectUrl ? redirectUrl : "/" },
       };
     }
 

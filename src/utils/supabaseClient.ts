@@ -1,9 +1,8 @@
-import { AuthChangeEvent, createClient, Session } from "@supabase/supabase-js";
+import { supabaseClient } from "@supabase/supabase-auth-helpers/nextjs";
+import { AuthChangeEvent, Session } from "@supabase/supabase-js";
+import { definitions } from "../types/supabase";
 
-const supabaseUrl = process.env.NEXT_PUBLIC_SUPABASE_URL || "";
-const supabaseAnonKey = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY || "";
-
-export const supabase = createClient(supabaseUrl, supabaseAnonKey);
+export const supabase = supabaseClient;
 
 export const updateSupabaseCookie = async (
   event: AuthChangeEvent,
@@ -15,4 +14,11 @@ export const updateSupabaseCookie = async (
     credentials: "same-origin",
     body: JSON.stringify({ event, session }),
   });
+};
+
+export const getRetrosByUserId = async (userId: string) => {
+  return await supabase
+    .from<definitions["retros"]>("retros")
+    .select("*")
+    .eq("created_by", userId);
 };

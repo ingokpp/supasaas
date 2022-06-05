@@ -12,6 +12,7 @@
     "@chakra-ui/react": "^2.1.2",
     "@emotion/react": "^11",
     "@emotion/styled": "^11",
+    "@supabase/supabase-auth-helpers": "^1.4.2",
     "@supabase/supabase-js": "^1.35.3",
     "classnames": "^2.3.1",
     "framer-motion": "^6",
